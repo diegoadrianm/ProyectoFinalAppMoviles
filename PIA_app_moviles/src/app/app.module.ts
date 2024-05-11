@@ -11,11 +11,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs,} from 'firebase/firestore/lite';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
-
+import { MaskitoModule } from '@maskito/angular';
 
 @NgModule({
   declarations: [AppComponent, InicioSesionComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, MaskitoModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

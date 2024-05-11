@@ -17,11 +17,23 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong><br>
+  <ion-list>
+    <ion-item *ngFor="let contacto of contactos">{{contacto.nombre}} {{contacto.primerApellido}} {{contacto.segundoApellido}}</ion-item>
+  </ion-list>
   
-  </div>
-
 </ion-content>
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button id="crearContacto">
+    <ion-icon name="add" ></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-modal trigger="crearContacto">
+  <ng-template>
+    <app-agregar-contacto></app-agregar-contacto>
+  </ng-template>
+</ion-modal>
+
 
 

@@ -1,0 +1,18 @@
+<div>
+    <div id="head">
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()" color="danger">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Agregar contacto</ion-title>
+    
+  </div>
+    <form (ngSubmit)="onSubmit()">
+    
+      <ion-input id="Nombre"  label="Nombre(s)" name="username" fill="outline" [(ngModel)]="formData.nombre"></ion-input>
+      <ion-input id="primerApellido" label="Primer apellido"  fill="outline" name="primerApellido" type="text" [(ngModel)]="formData.primerApellido"></ion-input>
+      <ion-input id="segundoApellido" label="Segundo apellido" fill="outline" name="segundoApellido" [(ngModel)]="formData.segundoApellido"></ion-input>
+      <ion-input id="numeroCel" label="Telefono celular" fill="outline" name="numeroCel"  [maskitoElement]="maskPredicate" [maskito]="phoneMask" [(ngModel)]="formData.numeroCel"></ion-input>
+
+      <ion-button id="Agregar" type="submit" color="success" slot="end">Agregar</ion-button> 
+    </form>
+</div>
