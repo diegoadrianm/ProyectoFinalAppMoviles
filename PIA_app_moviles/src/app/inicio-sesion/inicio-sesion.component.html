@@ -1,0 +1,33 @@
+
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title>Iniciar sesión</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-item>
+        <ion-input
+          label="Ingresa tu usuario"
+          labelPlacement="stacked"
+          type="text"
+          placeholder="Usuario"
+          (ngModel)="nuevoUsuario.usuario"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+        type="password"
+        placeholder="Contraseña"
+        label="Ingresa tu contraseña"
+        labelPlacement="stacked"
+        (ngModel)="nuevoUsuario.contrasenia"
+        ></ion-input>
+      </ion-item>
+    </ion-content>
