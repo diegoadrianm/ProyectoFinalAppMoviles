@@ -24,12 +24,12 @@
 </ion-content>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-  <ion-fab-button id="crearContacto">
+  <ion-fab-button id="crearContacto" (click)="setOpen(true)">
     <ion-icon name="add" ></ion-icon>
   </ion-fab-button>
 </ion-fab>
 
-<ion-modal trigger="crearContacto">
+<ion-modal [isOpen]="isModalOpen.isOpen">
   <ng-template>
     <app-agregar-contacto></app-agregar-contacto>
   </ng-template>

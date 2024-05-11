@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, output } from '@angular/core';
 import { Contacto } from '../Interfaces/Contacto';
 import { ModalController } from '@ionic/angular';
 import { MaskitoOptions, MaskitoElementPredicate } from '@maskito/core';
 import { ContactosService } from '../services/contactos.service';
+import { OpenModalService } from '../services/open-modal.service';
 
 @Component({
   selector: 'app-agregar-contacto',
@@ -11,7 +12,7 @@ import { ContactosService } from '../services/contactos.service';
 })
 export class AgregarContactoComponent  implements OnInit {
 
-  constructor(private modalCtrl: ModalController, private contacto: ContactosService) { }
+  constructor(private modalCtrl: ModalController, private contacto: ContactosService, public isModalOpen: OpenModalService) { }
 
   ngOnInit() {}
 
@@ -22,7 +23,7 @@ export class AgregarContactoComponent  implements OnInit {
   }
   
   cancel() {
-    return this.modalCtrl.dismiss(null, 'cancel');
+    this.isModalOpen.isOpen=false;
   }
 
   nuevoContacto: Contacto = {
@@ -47,8 +48,7 @@ export class AgregarContactoComponent  implements OnInit {
     this.formData.primerApellido = '';
     this.formData.segundoApellido = '';
     this.formData.numeroCel = undefined;
-
-    return this.modalCtrl.dismiss();      
+    this.isModalOpen.isOpen=false;
   }
 
   readonly phoneMask: MaskitoOptions = {
