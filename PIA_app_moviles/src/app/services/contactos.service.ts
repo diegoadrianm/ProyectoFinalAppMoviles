@@ -10,10 +10,16 @@ export class ContactosService {
 
   contactos: Contacto[] = [];
 
+  favoritos: Contacto[] = []
+
   agregarContactos(contactoNuevo: Contacto){
 
     this.contactos.push(contactoNuevo);
     console.log(contactoNuevo);
     console.log('hola');
+  }
+
+  agregarFavorito(contactoFavorito: Contacto){
+    this.favoritos.push(contactoFavorito);
   }
 }
