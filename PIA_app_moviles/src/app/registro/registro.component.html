@@ -1,13 +1,12 @@
-
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="cancel()">Cancel</ion-button>
     </ion-buttons>
     <ion-title>Iniciar sesión</ion-title>
-    <ion-buttons slot="end">
+    <!--ion-buttons slot="end">
       <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-    </ion-buttons>
+    </ion-buttons-->
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
@@ -22,6 +21,15 @@
   </ion-item>
   <ion-item>
     <ion-input
+    type="text"
+    placeholder="Email"
+    label="Ingresa tu correo electronico"
+    labelPlacement="stacked"
+    (ngModel)="nuevoUsuario.email"
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input
     type="password"
     placeholder="Contraseña"
     label="Ingresa tu contraseña"
@@ -29,5 +37,5 @@
     (ngModel)="nuevoUsuario.contrasenia"
     ></ion-input>
   </ion-item>
-  <ion-button id="botonRegistro" (click)="openModal()">¿No tienes cuenta? Registrate</ion-button>
+  <ion-button (click)="submit()">Aceptar</ion-button>
 </ion-content>

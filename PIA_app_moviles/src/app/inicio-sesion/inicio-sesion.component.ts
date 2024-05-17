@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Usuario } from '../Interfaces/Usuario';
 import { IonModal, ModalController } from '@ionic/angular';
+import RegistroComponent from '../registro/registro.component';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -19,6 +20,7 @@ export class InicioSesionComponent  implements OnInit {
   nuevoUsuario: Usuario = {
     usuario: '',
     contrasenia: '',
+    email: '',
     contactos: []
   } 
 
@@ -28,5 +30,14 @@ export class InicioSesionComponent  implements OnInit {
 
   confirm() {
     return this.modalCtrl.dismiss(null, '');  }
+
+    async openModal() {
+      const modal = await this.modalCtrl.create({
+        component: RegistroComponent,
+      });
+  
+      modal.present();
+      this.modalCtrl.dismiss();
+    }  
 
 }

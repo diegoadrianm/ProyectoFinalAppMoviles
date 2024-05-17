@@ -9,6 +9,7 @@ import { FolderPageRoutingModule } from './folder-routing.module';
 import { FolderPage } from './folder.page';
 import { AgregarContactoComponent } from '../agregar-contacto/agregar-contacto.component';
 import { MaskitoModule } from '@maskito/angular';
+import RegistroComponent from '../registro/registro.component';
 
 
 
@@ -20,6 +21,6 @@ import { MaskitoModule } from '@maskito/angular';
     FolderPageRoutingModule,
     MaskitoModule
   ],
-  declarations: [FolderPage, AgregarContactoComponent]
+  declarations: [FolderPage, AgregarContactoComponent, RegistroComponent]
 })
 export class FolderPageModule {}
