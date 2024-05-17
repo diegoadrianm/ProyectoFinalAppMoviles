@@ -10,6 +10,6 @@ export class AppComponent {
     { title: 'Favoritos', url: '/folder/Favoritos', icon: 'heart' },
     { title: 'Archivados', url: '/folder/Archivados', icon: 'archive' },
   ];
-  public labels = ['Familia', 'Amigos', 'Trabajo'];
+
   constructor() {}
 }

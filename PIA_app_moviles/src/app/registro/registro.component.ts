@@ -44,6 +44,8 @@ export default class RegistroComponent  implements OnInit {
   }
 
   submit() {
+
+    
     /*createUserWithEmailAndPassword(this.auth, this.nuevoUsuario.email, this.nuevoUsuario.contrasenia)
     .then((userCredential) => {
       // Signed in 

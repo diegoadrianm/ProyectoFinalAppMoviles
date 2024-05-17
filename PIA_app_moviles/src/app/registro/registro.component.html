@@ -1,41 +1,32 @@
-<ion-header>
-  <ion-toolbar>
+<div class="container">
+  <div id="head">
     <ion-buttons slot="start">
-      <ion-button (click)="cancel()">Cancel</ion-button>
+      <ion-button (click)="cancel()" color="danger">
+        <ion-icon name="close"></ion-icon> Cancelar
+      </ion-button>
     </ion-buttons>
-    <ion-title>Iniciar sesión</ion-title>
-    <!--ion-buttons slot="end">
-      <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-    </ion-buttons-->
-  </ion-toolbar>
-</ion-header>
-<ion-content class="ion-padding">
-  <ion-item>
-    <ion-input
-      label="Ingresa tu usuario"
-      labelPlacement="stacked"
-      type="text"
-      placeholder="Usuario"
-      (ngModel)="nuevoUsuario.usuario"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input
-    type="text"
-    placeholder="Email"
-    label="Ingresa tu correo electronico"
-    labelPlacement="stacked"
-    (ngModel)="nuevoUsuario.email"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input
-    type="password"
-    placeholder="Contraseña"
-    label="Ingresa tu contraseña"
-    labelPlacement="stacked"
-    (ngModel)="nuevoUsuario.contrasenia"
-    ></ion-input>
-  </ion-item>
-  <ion-button (click)="submit()">Aceptar</ion-button>
-</ion-content>
+    <ion-title>Registrate</ion-title>
+  </div>
+
+  <div class="form-container">
+    <ion-item lines="full">
+      <ion-input type="text" placeholder="Ingresa tu usuario" fill="outline" [(ngModel)]="nuevoUsuario.usuario"></ion-input>
+    </ion-item>
+  
+    <ion-item lines="full">
+      <ion-input type="email" placeholder="Ingresa tu correo" fill="outline" [(ngModel)]="nuevoUsuario.email"></ion-input>
+    </ion-item>
+  
+    <ion-item lines="full">
+      <ion-input type="password" placeholder="Ingresa tu contraseña" fill="outline" [(ngModel)]="nuevoUsuario.contrasenia"></ion-input>
+    </ion-item>
+  
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="success" (click)="submit()">Aceptar</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</div>
+
