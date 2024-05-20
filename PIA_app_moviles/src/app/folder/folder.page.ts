@@ -11,6 +11,7 @@ import { OpenModalService } from '../services/open-modal.service';
 
 
 
+
 @Component({
   selector: 'app-folder',
   templateUrl: './folder.page.html',
@@ -22,22 +23,21 @@ export class FolderPage implements OnInit {
   constructor(private modalCtrl: ModalController,private listaContactos: ContactosService, public isModalOpen: OpenModalService) {}
 
 
- 
-
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
   }
 
-
   contactos: Contacto[] = this.listaContactos.contactos;
 
-  
+  contactoSeleccionado: any
+
+  seleccionarContacto(contacto: any){
+    this.contactoSeleccionado = contacto
+  }
+
   setOpen(state: boolean) {
     this.isModalOpen.isOpen = state;  
   }
-  
-
-
 
   sesionIniciada: boolean = false;
 
@@ -47,5 +47,9 @@ export class FolderPage implements OnInit {
     });
 
     modal.present();
+  }
+
+  eliminarContacto(contacto: Contacto){
+    this.listaContactos.eliminarContacto(contacto);
   }
 }
