@@ -47,6 +47,7 @@ export class FolderPage implements OnInit {
 
   eliminarContacto(contacto: Contacto){
     this.listaContactos.eliminarContacto(contacto);
+    this.listaContactos.eliminarFavoritos(contacto);
   }
 
   agregarFavoritos(contacto: Contacto){

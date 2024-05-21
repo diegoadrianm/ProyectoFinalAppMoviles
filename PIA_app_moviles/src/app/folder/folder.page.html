@@ -26,7 +26,11 @@
       </ion-item-options>
   
       <ion-item >
-        {{contacto.nombre}} {{contacto.primerApellido}} {{contacto.segundoApellido}}
+        <ion-icon slot="start" name="person-circle"></ion-icon>
+        <ion-label>
+          {{contacto.nombre}} {{contacto.primerApellido}} {{contacto.segundoApellido}}
+        </ion-label>
+
       </ion-item>
   
       <ion-item-options side="end">
@@ -44,7 +48,7 @@
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button id="crearContacto" (click)="setOpen(true)">
-    <ion-icon name="add" ></ion-icon>
+    <ion-icon name="person-add" ></ion-icon>
   </ion-fab-button>
 </ion-fab>
 

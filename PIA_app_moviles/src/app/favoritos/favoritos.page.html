@@ -15,9 +15,13 @@
     <ion-item-sliding >
       <ion-item-options side="start">
       </ion-item-options>
-  
+      
       <ion-item >
-        {{contacto.nombre}} {{contacto.primerApellido}} {{contacto.segundoApellido}}
+        <ion-icon slot="start" name="person-circle"></ion-icon>
+        <ion-label>
+          {{contacto.nombre}} {{contacto.primerApellido}} {{contacto.segundoApellido}}
+        </ion-label>
+
       </ion-item>
   
       <ion-item-options side="end">
