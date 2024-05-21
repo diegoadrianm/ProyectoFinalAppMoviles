@@ -1,5 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Contacto } from '../Interfaces/Contacto';
+import { Firestore,addDoc,collection,collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
+const PATH = 'Contactos';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +12,14 @@ export class ContactosService {
 
   constructor() { }
 
+  private _firestore = inject(Firestore)
+  private _collection = collection(this._firestore, PATH);
+
   contactos: Contacto[] = [];   
   favoritos: Contacto[] = [];
 
 
-  agregarContactos(contactoNuevo: Contacto){
+ agregarContactos(contactoNuevo: Contacto){
 
     this.contactos.push(contactoNuevo);
     console.log(contactoNuevo);
@@ -31,6 +38,10 @@ export class ContactosService {
   eliminarFavoritos(contacto: Contacto){
     let position: number = this.favoritos.indexOf(contacto)
     this.favoritos.splice(position,1);
+  }
+
+  getContacts(){
+    return collectionData(this._collection) as Observable<Contacto[]>;
   }
 
 

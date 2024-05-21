@@ -31,6 +31,9 @@ export class FolderPage implements OnInit {
 
   favoritos: Contacto[] = this.listaContactos.favoritos;
 
+  private _ContactosService = inject(ContactosService)
+  contacts$ = this._ContactosService.getContacts();
+
   setOpen(state: boolean) {
     this.isModalOpen.isOpen = state;  
   }

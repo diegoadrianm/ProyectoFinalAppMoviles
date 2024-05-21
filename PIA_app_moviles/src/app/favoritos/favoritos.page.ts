@@ -17,7 +17,7 @@ export class FavoritosPage implements OnInit {
 
   favoritos: Contacto[] = [];
 
-  eliminarFavoritos(contacto: Contacto){
+ eliminarFavoritos(contacto: Contacto){
       this.listaContacto.eliminarFavoritos(contacto);
       alert("Se ha eliminado de favoritos")
     }
