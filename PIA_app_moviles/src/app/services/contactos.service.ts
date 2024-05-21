@@ -8,7 +8,8 @@ export class ContactosService {
 
   constructor() { }
 
-  contactos: Contacto[] = [];
+  contactos: Contacto[] = [];   
+  favoritos: Contacto[] = [];
 
 
   agregarContactos(contactoNuevo: Contacto){
@@ -22,4 +23,15 @@ export class ContactosService {
     let position: number = this.contactos.indexOf(contacto)
     this.contactos.splice(position,1);
   }
+
+  agregarFavoritos(contacto: Contacto){
+    this.favoritos.push(contacto);
+  }
+
+  eliminarFavoritos(contacto: Contacto){
+    let position: number = this.favoritos.indexOf(contacto)
+    this.favoritos.splice(position,1);
+  }
+
+
 }

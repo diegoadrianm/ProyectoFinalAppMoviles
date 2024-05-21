@@ -29,11 +29,7 @@ export class FolderPage implements OnInit {
 
   contactos: Contacto[] = this.listaContactos.contactos;
 
-  contactoSeleccionado: any
-
-  seleccionarContacto(contacto: any){
-    this.contactoSeleccionado = contacto
-  }
+  favoritos: Contacto[] = this.listaContactos.favoritos;
 
   setOpen(state: boolean) {
     this.isModalOpen.isOpen = state;  
@@ -51,5 +47,10 @@ export class FolderPage implements OnInit {
 
   eliminarContacto(contacto: Contacto){
     this.listaContactos.eliminarContacto(contacto);
+  }
+
+  agregarFavoritos(contacto: Contacto){
+    this.listaContactos.agregarFavoritos(contacto);
+    alert("Has agregado a un contacto a favoritos");
   }
 }
