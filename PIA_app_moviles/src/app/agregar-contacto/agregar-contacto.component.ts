@@ -43,14 +43,19 @@ private _contactService = inject(ContactosService);
     nombre: this.formData.nombre,
     primerApellido: this.formData.primerApellido,
     segundoApellido: this.formData.segundoApellido,
-    numeroCel: this.formData.numeroCel
+    numeroCel: this.formData.numeroCel,
+
     };
 
     try{
       await this._contactService.createContact(this.nuevoContacto);
     }
     catch(error){
+
     }
+
+    
+    this.isModalOpen.isOpen=false;
   };
 
 
