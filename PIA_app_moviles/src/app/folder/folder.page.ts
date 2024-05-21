@@ -8,6 +8,8 @@ import { Contacto } from '../Interfaces/Contacto';
 import { AgregarContactoComponent } from '../agregar-contacto/agregar-contacto.component';
 import { ContactosService } from '../services/contactos.service';
 import { OpenModalService } from '../services/open-modal.service';
+import { tap } from 'rxjs';
+import { Contact } from '../Interfaces/Contacto';
 
 
 
@@ -26,13 +28,11 @@ export class FolderPage implements OnInit {
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
   }
-
-  contactos: Contacto[] = this.listaContactos.contactos;
-
+  contactos: Contact[] = [];
   favoritos: Contacto[] = this.listaContactos.favoritos;
 
   private _ContactosService = inject(ContactosService)
-  contacts$ = this._ContactosService.getContacts();
+  contacts$ = this._ContactosService.getContacts().pipe(tap(values => console.log(values)));
 
   setOpen(state: boolean) {
     this.isModalOpen.isOpen = state;  
@@ -48,10 +48,14 @@ export class FolderPage implements OnInit {
     modal.present();
   }
 
-  eliminarContacto(contacto: Contacto){
-    this.listaContactos.eliminarContacto(contacto);
-    this.listaContactos.eliminarFavoritos(contacto);
+  async deleteContact(id: string){
+    try{
+      await this._ContactosService.deleteContact(id);
+    }
+    catch(error){}
   }
+
+
 
   agregarFavoritos(contacto: Contacto){
     this.listaContactos.agregarFavoritos(contacto);

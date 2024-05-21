@@ -1,7 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { Contacto } from '../Interfaces/Contacto';
+import { Contact } from '../Interfaces/Contacto';
 import { Firestore,addDoc,collection,collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { doc } from '@angular/fire/firestore';
+import { deleteDoc } from '@angular/fire/firestore';
+import { getDoc } from '@angular/fire/firestore';
 
 const PATH = 'Contactos';
 
@@ -19,17 +23,6 @@ export class ContactosService {
   favoritos: Contacto[] = [];
 
 
- agregarContactos(contactoNuevo: Contacto){
-
-    this.contactos.push(contactoNuevo);
-    console.log(contactoNuevo);
-    console.log('hola');
-  }
-
-  eliminarContacto(contacto: Contacto){
-    let position: number = this.contactos.indexOf(contacto)
-    this.contactos.splice(position,1);
-  }
 
   agregarFavoritos(contacto: Contacto){
     this.favoritos.push(contacto);
@@ -40,9 +33,22 @@ export class ContactosService {
     this.favoritos.splice(position,1);
   }
 
-  getContacts(){
-    return collectionData(this._collection) as Observable<Contacto[]>;
+  getContacts(): Observable<Contact[]> {
+    return collectionData(this._collection, { idField: 'id' }) as Observable<Contact[]>;
   }
+
+  createContact(contacto: Contacto){
+    return addDoc(this._collection, contacto)
+  }
+
+  deleteContact(id: string){
+    const documentRef = doc(this._firestore, PATH, id);
+    return deleteDoc(documentRef);
+    alert("Se ha eliminado correctamente")
+
+  }
+
+ 
 
 
 }
