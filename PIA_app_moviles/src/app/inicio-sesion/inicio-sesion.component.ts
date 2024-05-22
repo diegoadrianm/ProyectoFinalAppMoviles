@@ -18,10 +18,8 @@ export class InicioSesionComponent  implements OnInit {
   modal!: IonModal;
   
   nuevoUsuario: Usuario = {
-    usuario: '',
     contrasenia: '',
     email: '',
-    contactos: []
   } 
 
   cancel() {

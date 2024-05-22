@@ -1,32 +1,14 @@
-<div class="container">
-  <div id="head">
-    <ion-buttons slot="start">
-      <ion-button (click)="cancel()" color="danger">
-        <ion-icon name="close"></ion-icon> Cancelar
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Registrate</ion-title>
-  </div>
-
-  <div class="form-container">
-    <ion-item lines="full">
-      <ion-input type="text" placeholder="Ingresa tu usuario" fill="outline" [(ngModel)]="nuevoUsuario.usuario"></ion-input>
-    </ion-item>
-  
-    <ion-item lines="full">
-      <ion-input type="email" placeholder="Ingresa tu correo" fill="outline" [(ngModel)]="nuevoUsuario.email"></ion-input>
-    </ion-item>
-  
-    <ion-item lines="full">
-      <ion-input type="password" placeholder="Ingresa tu contraseña" fill="outline" [(ngModel)]="nuevoUsuario.contrasenia"></ion-input>
-    </ion-item>
-  
-    <ion-row>
-      <ion-col>
-        <ion-button expand="block" color="success" (click)="submit()">Aceptar</ion-button>
-      </ion-col>
-    </ion-row>
-  </div>
-
+<div style="width: 300px; margin: 0 auto;">
+  <h2>Registro de usuario</h2>
+  <form [formGroup]="formReg" (ngSubmit)="onSubmit()" style="margin-bottom: 20px;">
+    <div style="margin-bottom: 15px;">
+      <label>Email</label>
+      <input type="text" style="width: 100%;" formControlName="email">
+    </div>
+    <div style="margin-bottom: 15px;">
+      <label>Password</label>
+      <input type="password" style="width: 100%;" formControlName="password">
+    </div>
+    <button type="submit" style="width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; cursor: pointer;">Enviar</button>
+  </form>
 </div>
-

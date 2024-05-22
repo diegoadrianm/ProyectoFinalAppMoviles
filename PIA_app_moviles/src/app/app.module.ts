@@ -15,6 +15,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 
 
+
 @NgModule({
   declarations: [AppComponent, InicioSesionComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],

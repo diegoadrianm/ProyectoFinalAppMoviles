@@ -17,32 +17,43 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list *ngFor="let contacto of contacts$ | async">
-    <ion-item-sliding >
-      <ion-item-options side="start">
-        <ion-item-option color="success">
-          <ion-icon slot="bottom" name="archive"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
+  <ion-accordion-group multiple="true">
+    <ion-accordion *ngFor="let contacto of contacts$ | async">
+      <ion-list slot="header">
+        <ion-item-sliding>
+          <ion-item-options side="start">
+            <ion-item-option color="success">
+              <ion-icon slot="bottom" name="archive"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        
+          <ion-item>
+            <ion-icon slot="start" name="person-circle"></ion-icon>
+            <ion-label>
+              {{contacto.nombre}} {{contacto.primerApellido}} {{contacto.segundoApellido}}
+            </ion-label>
+          </ion-item>
   
-      <ion-item >
-        <ion-icon slot="start" name="person-circle"></ion-icon>
-        <ion-label>
-          {{contacto.nombre}} {{contacto.primerApellido}} {{contacto.segundoApellido}}
-        </ion-label>
-
+          <ion-item-options side="end">
+            <ion-item-option>
+              <ion-icon slot="bottom" name="heart" (click)="agregarFavoritos(contacto)"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="danger">
+              <ion-icon slot="bottom" name="trash" (click)="deleteContact(contacto.id)"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+      
+      <!-- Muevo este div dentro del ion-accordion, pero también lo envuelvo con un ion-item para mantener la estructura de la lista -->
+      <ion-item slot="content">
+        <div class="ion-padding">{{contacto.numeroCel}}</div>
       </ion-item>
-  
-      <ion-item-options side="end">
-        <ion-item-option>
-          <ion-icon slot="bottom" name="heart" (click)="agregarFavoritos(contacto)"></ion-icon>
-        </ion-item-option>
-        <ion-item-option color="danger">
-          <ion-icon slot="bottom" name="trash" (click)="deleteContact(contacto.id)"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+    </ion-accordion>
+  </ion-accordion-group>
+
+
+
   
 </ion-content>
 

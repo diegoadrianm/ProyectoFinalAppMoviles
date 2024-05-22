@@ -10,6 +10,7 @@ import { FolderPage } from './folder.page';
 import { AgregarContactoComponent } from '../agregar-contacto/agregar-contacto.component';
 import { MaskitoModule } from '@maskito/angular';
 import RegistroComponent from '../registro/registro.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +20,8 @@ import RegistroComponent from '../registro/registro.component';
     FormsModule,
     IonicModule,
     FolderPageRoutingModule,
-    MaskitoModule
+    MaskitoModule,
+    ReactiveFormsModule
   ],
   declarations: [FolderPage, AgregarContactoComponent, RegistroComponent]
 })

@@ -4,6 +4,8 @@ import { Usuario } from '../Interfaces/Usuario';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs,} from 'firebase/firestore/lite';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { AuthService } from '../services/auth.service';
+import { FormControl,FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -13,54 +15,28 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 })
 export default class RegistroComponent  implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  formReg: FormGroup;
 
-  firebaseConfig = {
-    projectId:"pia-appmoviles-bfb3a",
-    appId:"1:334001649967:web:c16fd0c8ef459530ac89da",
-    storageBucket:"pia-appmoviles-bfb3a.appspot.com",
-    apiKey:"AIzaSyDZLgTbVdKBQD6eHSGQBSBbLulMcb9ltog",
-    authDomain:"pia-appmoviles-bfb3a.firebaseapp.com",
-    messagingSenderId:"334001649967"
-    //la declaracion la moví aqui en lugar de en imports
+  constructor(private modalCtrl: ModalController, private userService: AuthService, private formBuilder: FormBuilder) {
+
+    this.formReg = this.formBuilder.group({
+      email: new FormControl(),
+      password: new FormControl()
+    })
   }
-  
-  app = initializeApp(this.firebaseConfig); //inicializa la app
-  db = getFirestore(this.app); //accede a la instancia de la app
-  
-  auth = getAuth(this.app);
 
-  nuevoUsuario: Usuario = {
-    usuario: '',
-    contrasenia: '',
-    email: '',
-    contactos: []
-  } 
-
-  ngOnInit() {}
+  ngOnInit(){
+  }
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  submit() {
+  onSubmit() {
 
-    
-    /*createUserWithEmailAndPassword(this.auth, this.nuevoUsuario.email, this.nuevoUsuario.contrasenia)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // .. 
-      console.log(errorCode, errorMessage);
-    });*/
+    this.userService.register(this.formReg.value).then(response => {console.log(response)}).catch(error => console.log(error));
 
-    console.log(this.nuevoUsuario.email)
-    alert('que pedo');//aun no queda, marca un error
+    alert("Te has registrado exitosamente");//aun no queda, marca un error
 
     return this.modalCtrl.dismiss(null, '');  
   }
