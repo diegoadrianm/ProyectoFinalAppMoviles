@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Usuario } from '../Interfaces/Usuario';
 import { IonModal, ModalController } from '@ionic/angular';
 import RegistroComponent from '../registro/registro.component';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -10,7 +12,17 @@ import RegistroComponent from '../registro/registro.component';
 })
 export class InicioSesionComponent  implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  formLogin: FormGroup;
+
+  constructor(private modalCtrl: ModalController, private auth: AuthService, private formBuilder: FormBuilder) {
+
+    this.formLogin =  this.formBuilder.group({
+      email: new FormControl(), 
+      password: new FormControl()
+    })
+  }
+
+
 
   ngOnInit() {}
 
@@ -24,6 +36,18 @@ export class InicioSesionComponent  implements OnInit {
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
+  }
+
+  onSubmit(){
+    this.auth.login(this.formLogin.value)
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => console.log(error))
+
+    alert("Has iniciado sesion exitosamente exitosamente");
+
+    return this.modalCtrl.dismiss(null, '');  
   }
 
   confirm() {

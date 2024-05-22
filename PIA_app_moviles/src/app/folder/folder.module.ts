@@ -11,6 +11,7 @@ import { AgregarContactoComponent } from '../agregar-contacto/agregar-contacto.c
 import { MaskitoModule } from '@maskito/angular';
 import RegistroComponent from '../registro/registro.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InicioSesionComponent } from '../inicio-sesion/inicio-sesion.component';
 
 
 
@@ -23,6 +24,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaskitoModule,
     ReactiveFormsModule
   ],
-  declarations: [FolderPage, AgregarContactoComponent, RegistroComponent]
+  declarations: [FolderPage, AgregarContactoComponent, RegistroComponent, InicioSesionComponent]
 })
 export class FolderPageModule {}

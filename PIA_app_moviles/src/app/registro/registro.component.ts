@@ -36,7 +36,7 @@ export default class RegistroComponent  implements OnInit {
 
     this.userService.register(this.formReg.value).then(response => {console.log(response)}).catch(error => console.log(error));
 
-    alert("Te has registrado exitosamente");//aun no queda, marca un error
+    alert("Te has registrado exitosamente");
 
     return this.modalCtrl.dismiss(null, '');  
   }
