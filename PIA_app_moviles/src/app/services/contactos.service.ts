@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Contacto } from '../Interfaces/Contacto';
 import { Contact } from '../Interfaces/Contacto';
-import { Firestore,addDoc,collection,collectionData } from '@angular/fire/firestore';
+import { Firestore,addDoc,collection,collectionData, orderBy, query } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { doc } from '@angular/fire/firestore';
 import { deleteDoc } from '@angular/fire/firestore';
@@ -34,7 +34,8 @@ export class ContactosService {
   }
 
   getContacts(): Observable<Contact[]> {
-    return collectionData(this._collection, { idField: 'id' }) as Observable<Contact[]>;
+    const q = query(this._collection, orderBy('nombre'));
+    return collectionData( q, { idField: 'id' }) as Observable<Contact[]>;
   }
 
   createContact(contacto: Contacto){
