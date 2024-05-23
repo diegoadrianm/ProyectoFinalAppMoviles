@@ -16,7 +16,7 @@ export class AgregarContactoComponent  implements OnInit {
 
   constructor(private modalCtrl: ModalController, private contacto: ContactosService, public isModalOpen: OpenModalService) { }
 
-private _contactService = inject(ContactosService);
+  private _contactService = inject(ContactosService);
 
   ngOnInit() {}
 

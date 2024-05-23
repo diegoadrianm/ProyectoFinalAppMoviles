@@ -64,6 +64,8 @@ export class FolderPage implements OnInit {
   async deleteContact(id: string){
     try{
       await this._ContactosService.deleteContact(id);
+      this.contactos$ = this._ContactosService.getContacts().pipe(tap(values => console.log(values)));
+      alert("Has eliminado el contacto exitosamente")
     }
     catch(error){}
   }
@@ -72,7 +74,7 @@ export class FolderPage implements OnInit {
     this.userService.logout()
       .then(()=>{
 
-        return this.modalCtrl.dismiss(null, '');  
+            return this.modalCtrl.dismiss(null, '');  
 
       })
       .catch(error => console.log(error))

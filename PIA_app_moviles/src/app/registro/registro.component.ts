@@ -40,8 +40,5 @@ export default class RegistroComponent  implements OnInit {
 
     return this.modalCtrl.dismiss(null, '');  
   }
- 
-  
-  
-  
+
 }

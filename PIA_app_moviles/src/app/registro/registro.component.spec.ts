@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
+import RegistroComponent from './registro.component';
 
-import RegistroComponent from './RegistroComponent';
 
 describe('RegistroComponent', () => {
   let component: RegistroComponent;

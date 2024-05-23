@@ -46,8 +46,8 @@ export class ContactosService {
     }
 
     const contactsQuery = query(this._collection, where('uid', '==', uid));
-    const q = query(this._collection, orderBy('nombre'));
-    return collectionData(contactsQuery) as Observable<Contact[]>;
+    const q = query(this._collection);
+    return collectionData(contactsQuery, {idField: 'id'}) as Observable<Contact[]>;
   }
 
   createContact(contacto: Contacto): Promise<DocumentReference<Contacto>> {
@@ -64,7 +64,6 @@ export class ContactosService {
     const documentRef = doc(this._firestore, PATH, id);
     return deleteDoc(documentRef);
     alert("Se ha eliminado correctamente")
-
   }
 
  
