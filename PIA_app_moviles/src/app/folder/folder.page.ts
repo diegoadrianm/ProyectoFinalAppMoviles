@@ -8,8 +8,10 @@ import { Contacto } from '../Interfaces/Contacto';
 import { AgregarContactoComponent } from '../agregar-contacto/agregar-contacto.component';
 import { ContactosService } from '../services/contactos.service';
 import { OpenModalService } from '../services/open-modal.service';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Contact } from '../Interfaces/Contacto';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
+import { AuthService } from '../services/auth.service';
 
 
 
@@ -20,25 +22,36 @@ import { Contact } from '../Interfaces/Contacto';
   styleUrls: ['./folder.page.scss'],
 })
 export class FolderPage implements OnInit {
+
+  public sesionIniciada: boolean = false;
+  public contactos$: Observable<Contact[]> | null = null;
+  
+
   public folder!: string;
   private activatedRoute = inject(ActivatedRoute);
-  constructor(private modalCtrl: ModalController,private listaContactos: ContactosService, public isModalOpen: OpenModalService) {}
+  constructor(private modalCtrl: ModalController,private listaContactos: ContactosService, public isModalOpen: OpenModalService, private auth: Auth, private userService: AuthService) {}
 
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+
+    onAuthStateChanged(this.auth, user =>{
+      if(user){
+        this.sesionIniciada = true;
+        this.contactos$ = this._ContactosService.getContacts().pipe(tap(values => console.log(values)))
+      }else{
+        this.sesionIniciada = false;
+      }
+    })
   }
   contactos: Contact[] = [];
   favoritos: Contacto[] = this.listaContactos.favoritos;
 
   private _ContactosService = inject(ContactosService)
-  contacts$ = this._ContactosService.getContacts().pipe(tap(values => console.log(values)));
 
   setOpen(state: boolean) {
     this.isModalOpen.isOpen = state;  
   }
-
-  sesionIniciada: boolean = false;
 
   async openModal() {
     const modal = await this.modalCtrl.create({
@@ -53,6 +66,16 @@ export class FolderPage implements OnInit {
       await this._ContactosService.deleteContact(id);
     }
     catch(error){}
+  }
+
+  cerrarSesion(){
+    this.userService.logout()
+      .then(()=>{
+
+        return this.modalCtrl.dismiss(null, '');  
+
+      })
+      .catch(error => console.log(error))
   }
 
 
