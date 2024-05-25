@@ -1,4 +1,3 @@
-import { FotoPerfil } from "./FotoPerfil";
 
 export interface Contact extends Contacto{
     id: string;
@@ -9,6 +8,7 @@ export interface Contacto{
     primerApellido: string,
     segundoApellido: string,
     numeroCel?: number,
-    fotoPerfil?:  FotoPerfil
+    filepath: string; 
+    webViewPath?: string | null;
 }
 

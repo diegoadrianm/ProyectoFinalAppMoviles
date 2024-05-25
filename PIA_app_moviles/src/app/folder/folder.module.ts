@@ -8,7 +8,6 @@ import { FolderPageRoutingModule } from './folder-routing.module';
 
 import { FolderPage } from './folder.page';
 import { AgregarContactoComponent } from '../agregar-contacto/agregar-contacto.component';
-import { MaskitoModule } from '@maskito/angular';
 import RegistroComponent from '../registro/registro.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InicioSesionComponent } from '../inicio-sesion/inicio-sesion.component';
@@ -21,7 +20,6 @@ import { InicioSesionComponent } from '../inicio-sesion/inicio-sesion.component'
     FormsModule,
     IonicModule,
     FolderPageRoutingModule,
-    MaskitoModule,
     ReactiveFormsModule
   ],
   declarations: [FolderPage, AgregarContactoComponent, RegistroComponent, InicioSesionComponent]

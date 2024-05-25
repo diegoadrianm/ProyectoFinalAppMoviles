@@ -1,4 +1,7 @@
 <ion-header [translucent]="true">
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
   <ion-toolbar>
     <ion-title>Favoritos</ion-title>
   </ion-toolbar>
@@ -6,12 +9,15 @@
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-toolbar>
       <ion-title size="large">Favoritos</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-list *ngFor="let contacto of favoritos">
+  <ion-list *ngFor="let contacto of contactos$ | async">
     <ion-item-sliding >
       <ion-item-options side="start">
       </ion-item-options>
@@ -26,7 +32,7 @@
   
       <ion-item-options side="end">
         <ion-item-option>
-          <ion-icon slot="bottom" name="heart-dislike-outline" (click)="eliminarFavoritos(contacto)"></ion-icon>
+          <ion-icon slot="bottom" name="heart-dislike-outline" (click)="eliminarFavoritos(contacto.id)"></ion-icon>
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>

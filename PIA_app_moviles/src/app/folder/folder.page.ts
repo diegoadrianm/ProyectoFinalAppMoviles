@@ -12,6 +12,9 @@ import { Observable, tap } from 'rxjs';
 import { Contact } from '../Interfaces/Contacto';
 import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
+import { FotoService } from '../services/foto.service';
+import { WebView } from '@capacitor/core';
+import { getDownloadURL,getStorage,listAll,ref } from 'firebase/storage';
 
 
 
@@ -29,8 +32,14 @@ export class FolderPage implements OnInit {
 
   public folder!: string;
   private activatedRoute = inject(ActivatedRoute);
-  constructor(private modalCtrl: ModalController,private listaContactos: ContactosService, public isModalOpen: OpenModalService, private auth: Auth, private userService: AuthService) {}
 
+  images: string[];
+  constructor(private modalCtrl: ModalController,private listaContactos: ContactosService, public isModalOpen: OpenModalService, private auth: Auth, private userService: AuthService, private Foto: FotoService) {
+    this.images = []
+  }
+
+  
+  storage = getStorage();
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
@@ -43,9 +52,12 @@ export class FolderPage implements OnInit {
         this.sesionIniciada = false;
       }
     })
+
+    this.getPictures();
   }
-  contactos: Contact[] = [];
+  contactos: Contacto[] = [];
   favoritos: Contacto[] = this.listaContactos.favoritos;
+
 
   private _ContactosService = inject(ContactosService)
 
@@ -86,4 +98,22 @@ export class FolderPage implements OnInit {
     this.listaContactos.agregarFavoritos(contacto);
     alert("Has agregado a un contacto a favoritos");
   }
+
+  async getPictures() {
+
+   const imagesRef = ref(this.storage, 'images')
+   listAll(imagesRef)
+    .then(async response => {
+      console.log(response);
+      this.images = [];
+
+      for (let item of response.items){
+        const url = await getDownloadURL(item)
+        this.images.push(url)
+
+      }
+    })
+    .catch(error => console.log(error))
+  }
 }
+

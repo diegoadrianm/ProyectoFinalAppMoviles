@@ -9,7 +9,7 @@ import { getDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 
 const PATH = 'Contactos';
-
+const FAV = 'Favoritos' 
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +20,7 @@ export class ContactosService {
   private _firestore = inject(Firestore)
   private _auth = inject(Auth);
   private _collection = collection(this._firestore, PATH);
+  private _fav_collection = collection(this._firestore, FAV)
 
   contactos: Contacto[] = [];   
   favoritos: Contacto[] = [];
@@ -30,13 +31,34 @@ export class ContactosService {
     return user ? user.uid : null;
   }
 
-  agregarFavoritos(contacto: Contacto){
+  agregarFavoritos(contacto: Contacto): Promise<DocumentReference<Contacto>> {
     this.favoritos.push(contacto);
+
+    const uid = this.getUserUID();
+    if (!uid) {
+      throw new Error("Usuario no autenticado");
+    }
+
+    const contactWithUID = { ...contacto, uid };
+    return addDoc(this._fav_collection, contactWithUID) as Promise<DocumentReference<Contacto>>;
+    
   }
 
-  eliminarFavoritos(contacto: Contacto){
-    let position: number = this.favoritos.indexOf(contacto)
-    this.favoritos.splice(position,1);
+  getFavs() {
+    const uid = this.getUserUID();
+    if(!uid){
+      throw new Error ("Usuario no autenticado");
+    }
+
+    const contactsQuery = query(this._fav_collection, where('uid', '==', uid));
+    const q = query(this._fav_collection);
+    return collectionData(contactsQuery, {idField: 'id'}) as Observable<Contact[]>;
+  }
+
+  eliminarFavoritos(id: string){
+    const documentRef = doc(this._firestore, FAV, id);
+    alert("Se ha eliminado correctamente")
+    return deleteDoc(documentRef);
   }
 
   getContacts(): Observable<Contact[]> {
@@ -62,9 +84,15 @@ export class ContactosService {
 
   deleteContact(id: string){
     const documentRef = doc(this._firestore, PATH, id);
-    return deleteDoc(documentRef);
     alert("Se ha eliminado correctamente")
+
+    const documentRef2 = doc(this._firestore, FAV, id);
+    deleteDoc(documentRef2);
+    return deleteDoc(documentRef);
+
+  
   }
+  
 
  
 

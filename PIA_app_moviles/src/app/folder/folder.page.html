@@ -1,8 +1,8 @@
 <ion-header [translucent]="true">
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
     <ion-buttons slot="end">
       <ion-button id="iniciarSesion" *ngIf="!sesionIniciada" expand="block" (click)="openModal()">Iniciar Sesion</ion-button>
       <ion-button id="cerrarSesion" *ngIf="sesionIniciada" expand="block" (click)="cerrarSesion()" color="danger">Cerrar sesion</ion-button>
@@ -19,6 +19,7 @@
   </ion-header>
 
   <div *ngIf="sesionIniciada">
+    <div *ngFor="let image of images">
       <ion-accordion-group multiple="true">
         <ion-accordion *ngFor="let contacto of contactos$ | async">
           <ion-list slot="header">
@@ -49,17 +50,19 @@
           
           <!-- Muevo este div dentro del ion-accordion, pero también lo envuelvo con un ion-item para mantener la estructura de la lista -->
           <ion-item slot="content">
-            <div class="ion-padding">{{contacto.numeroCel}}</div>
+          
+            <ion-card>
+              <img [src]="image" alt="" >
+              <ion-card-header>
+                <ion-card-title>{{contacto.nombre}} {{contacto.primerApellido}} {{contacto.segundoApellido}}</ion-card-title>
+                <ion-card-subtitle>{{contacto.numeroCel}}</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
           </ion-item>
         </ion-accordion>
       </ion-accordion-group>
-
+ </div>
   </div>
-
-
-
-
-  
 </ion-content>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
